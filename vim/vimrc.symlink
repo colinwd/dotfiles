@@ -1,4 +1,41 @@
-syntax on
-
-" Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
+set autoread
+set ruler
+set number
+set relativenumber
+set wildmenu
+
+" Make backspace act normal
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Search
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+
+" stfu
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Visual
+syntax on
+set background=dark
+colorscheme base16-default
+let base16colorspace="256"
+set t_Co=256
+
+set encoding=utf8
+
+" Tabs and indents
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+

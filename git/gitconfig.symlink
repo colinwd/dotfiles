@@ -28,13 +28,13 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
-	pager = less -r
+	    pager = less -R
 [apply]
         whitespace = nowarn
 [mergetool]
         keepBackup = false
-[difftool]
-        prompt = false
+[diff]
+	tool = meld
 [help]
         autocorrect = 1
 [push]
