@@ -48,3 +48,9 @@ done
 export LANG=en_US.UTF-8
 
 unset config_files
+
+#eval prompt every time
+setopt prompt_subst
+
+#read current aws env
+export AWS_ENV=$(cat ~/.dotfiles/emdeon/current_env)
