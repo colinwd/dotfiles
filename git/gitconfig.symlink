@@ -4,7 +4,7 @@
 [hub]
         protocol = https
 [user]
-        name = Colin Davis
+	name = Colin Davis
         email = codavis@emdeon.com
 [credential]
         helper = cache
@@ -43,3 +43,5 @@
         #
         # Setting to git 2.0 default to surpress warning message
         default = simple
+[usr]
+	email = codavis@emdeon.com
