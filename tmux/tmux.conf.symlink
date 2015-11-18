@@ -1,0 +1,46 @@
+set -g base-index 1
+
+# Pane movement
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Pane resizing
+bind -r Left  resize-pane -L 2
+bind -r Down  resize-pane -D 2
+bind -r Up    resize-pane -U 2
+bind -r Right resize-pane -R 2
+
+# Alt-arrows keys to switch panes
+bind -n M-Left select-pane -L
+bind -n M-Down select-pane -D 
+bind -n M-Up select-pane -U
+bind -n M-Right select-pane -R
+
+# Shift arrow to switch windows
+bind -n S-Left  previous-window
+bind -n S-Right next-window
+
+# 256 colors please
+set -g default-terminal "screen-256color"
+
+# Enable mouse
+setw -g mode-mouse on
+
+# remap prefix to C-a
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+
+# enable ctrl movement
+set-window-option -g xterm-keys on
+
+# tmux-url-select
+bind z run tmux-url-select
+
+# Reload tmux config
+bind r source-file ~/.tmux.conf
+
+# Scroll history
+set -g history-limit 30000

@@ -18,7 +18,7 @@
 	cam = commit -am
 	cm = commit -m
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	st = status
+	st = status -s
 	diff = diff --color-words
 [color]
         diff = auto
@@ -29,6 +29,7 @@
         excludesfile = ~/.gitignore
         editor = vim
 	    pager = less -R
+	autocrlf = input
 [apply]
         whitespace = nowarn
 [mergetool]
