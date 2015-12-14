@@ -2,18 +2,18 @@
 #
 
 [hub]
-        protocol = https
+    protocol = https
 [user]
 	name = Colin Davis
-        email = codavis@emdeon.com
+    email = codavis@emdeon.com
 [credential]
-        helper = cache
+    helper = cache
 [alias]
-        co = checkout
-        promote = !$DOTFILES/bin/git-promote
-        wtf     = !$DOTFILES/bin/git-wtf
-        rank-contributors = !$DOTFILES/bin/git-rank-contributors
-        count   = !git shortlog -sn
+    co = checkout
+    promote = !$DOTFILES/bin/git-promote
+    wtf     = !$DOTFILES/bin/git-wtf
+    rank-contributors = !$DOTFILES/bin/git-rank-contributors
+    count   = !git shortlog -sn
 	aa = add --all
 	cam = commit -am
 	cm = commit -m
@@ -21,28 +21,26 @@
 	st = status -s
 	diff = diff --color-words
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 [core]
-        excludesfile = ~/.gitignore
-        editor = vim
-	    pager = less -R
-	autocrlf = input
+    excludesfile = ~/.gitignore
+    editor = vim
+	pager = less -R
+    autocrlf = input
 [apply]
-        whitespace = nowarn
+    whitespace = nowarn
 [mergetool]
-        keepBackup = false
+    keepBackup = false
 [diff]
 	tool = meld
 [help]
-        autocorrect = 1
+    autocorrect = 1
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to surpress warning message
-        default = simple
-[usr]
-	email = codavis@emdeon.com
+    # See `git help config` (search for push.default)
+    # for more information on different options of the below setting.
+    #
+    # Setting to git 2.0 default to surpress warning message
+    default = simple
