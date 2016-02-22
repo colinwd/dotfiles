@@ -18,43 +18,10 @@ wlr-clone() {
     git clone git@git.westlakerobotics.com:westlakerobotics/$1
 }
 
-dev() {
-    echo "changing to dev"
-    cp ~/code/infrastructure/gradle.properties.dev ~/code/infrastructure/gradle.properties
-    chmod 777 ~/.ssh/current.pem
-    cp ~/.ssh/build.pem ~/.ssh/current.pem
-    chmod 400 ~/.ssh/current.pem
-    export AWS_ENV=dev
-    echo "dev" > ~/.dotfiles/emdeon/current_env
-    echo "changed to dev"
-}
-
-nonprod() {
-    echo "changing to nonprod"
-    cp ~/code/infrastructure/gradle.properties.nonprod ~/code/infrastructure/gradle.properties
-    chmod 777 ~/.ssh/current.pem
-    cp ~/.ssh/wlr-nonprod.pem ~/.ssh/current.pem
-    chmod 400 ~/.ssh/current.pem
-    export AWS_ENV=nonprod
-    echo "nonprod" > ~/.dotfiles/emdeon/current_env
-    echo "changed to nonprod"
-}
-
-cert() {
-    echo "changing to cert"
-    cp ~/code/infrastructure/gradle.properties.prod ~/code/infrastructure/gradle.properties
-    chmod 777 ~/.ssh/current.pem
-    cp ~/.ssh/wlr-cert.pem ~/.ssh/current.pem
-    chmod 400 ~/.ssh/current.pem
-    export AWS_ENV=cert
-    echo "cert" > ~/.dotfiles/emdeon/current_env
-    echo "changed to cert"
-}
-
 mobius() {
     echo "changing to mobius"
     chmod 777 ~/.ssh/current.pem
-    cp ~/.ssh/mobius-dev.pem ~/.ssh/current.pem
+    cp ~/.ssh/medical-billing-dev.pem ~/.ssh/current.pem
     chmod 400 ~/.ssh/current.pem
     export AWS_ENV=mobius
     echo "mobius" > ~/.dotfiles/emdeon/current_env

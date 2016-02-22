@@ -1,0 +1,15 @@
+#!/usr/bin/tmux source-file
+
+new-session -d
+split-window -d -t 0 -v
+split-window -d -t 0 -h
+split-window -d -t 2 -h
+
+setw synchronize-panes on
+
+send-keys 'cd ~/code/mobius' enter
+send-keys 'clear' enter
+
+setw synchronize-panes off
+
+attach
