@@ -16,8 +16,6 @@ export DOTFILES=$HOME/.dotfiles
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/code/mobius
 
-alias python=python3
-
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
 if [[ -a ~/.localrc ]]
@@ -61,3 +59,7 @@ setopt prompt_subst
 
 #read current aws env
 export AWS_ENV=$(cat ~/.dotfiles/emdeon/current_env)
+
+# use python 3
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+source $HOME/.virtualenvs/py3/bin/activate
