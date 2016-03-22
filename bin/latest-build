@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+"""Returns the last successful Jenkins # build for a project."""
+
+import json
+import os
+import requests
+import sys
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+
+def get_last_successful_build(job_name):
+    """
+    Grab job by name and get the last successful build number.
+
+    Returns 0 if something goes wrong.
+    """
+    r = requests.get('https://jenkins.mobiusteam.net/job/' + job_name +
+                     '/lastSuccessfulBuild/api/json', verify=False)
+
+    if r.status_code is not 200:
+        return 0
+
+    return json.loads(r.text)['number']
+
+
+def all_jobs():
+    """Generate list of all job names in Jenkins."""
+    r = requests.get('https://jenkins.mobiusteam.net/api/json', verify=False)
+    jobs = json.loads(r.text)['jobs']
+
+    for job in jobs:
+        yield job['name'].split(' ')[0]
+
+if __name__ == '__main__':
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+    project_name = os.getcwd().split('/')[-1]
+
+    exact_match = get_last_successful_build(project_name)
+
+    if exact_match != 0:
+        print(exact_match)
+    else:
+        matched_jobs = [job for job in all_jobs() if project_name in job]
+
+        if len(matched_jobs) == 0:
+            print('Unable to find this project in Jenkins!')
+            sys.exit(1)
+
+        print('Which job did you want?')
+        candidates = {str(i+1): job for i, job in enumerate(matched_jobs)}
+        [print(str(k) + '. ' + v) for k, v in sorted(candidates.items())]
+
+        selection = input()
+        print(get_last_successful_build(candidates[selection]))
