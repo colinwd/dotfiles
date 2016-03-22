@@ -8,6 +8,15 @@ import sys
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
+def usage():
+    return """
+Usage:
+
+latest-build            Uses your current directory to try and match a job in Jenkins
+latest-build [name]     Searches for the specified job in Jenkins
+    """
+
+
 def get_last_successful_build(job_name):
     """
     Grab job by name and get the last successful build number.
@@ -34,7 +43,15 @@ def all_jobs():
 if __name__ == '__main__':
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-    project_name = os.getcwd().split('/')[-1]
+    if len(sys.argv) == 2:
+        arg = sys.argv[1]
+        if arg == '-h' or arg == '--help':
+            print(usage())
+            sys.exit(1)
+        else:
+            project_name = arg
+    else:
+        project_name = os.getcwd().split('/')[-1]
 
     exact_match = get_last_successful_build(project_name)
 
@@ -44,12 +61,13 @@ if __name__ == '__main__':
         matched_jobs = [job for job in all_jobs() if project_name in job]
 
         if len(matched_jobs) == 0:
-            print('Unable to find this project in Jenkins!')
+            print('Unable to find project "' + project_name + '" in Jenkins!')
             sys.exit(1)
 
-        print('Which job did you want?')
         candidates = {str(i+1): job for i, job in enumerate(matched_jobs)}
         [print(str(k) + '. ' + v) for k, v in sorted(candidates.items())]
+        print('\nWhich job did you want? ', sep='')
 
         selection = input()
+        print()
         print(get_last_successful_build(candidates[selection]))
