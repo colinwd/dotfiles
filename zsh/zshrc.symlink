@@ -14,7 +14,7 @@ source $ZSH/oh-my-zsh.sh
 export DOTFILES=$HOME/.dotfiles
 
 # your project folder that we can `c [tab]` to
-export PROJECTS=~/code/mobius
+export PROJECTS=~/code
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
@@ -22,6 +22,11 @@ if [[ -a ~/.localrc ]]
 then
   source ~/.localrc
 fi
+
+# log all commands
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history | tail -n 1)" >> ~/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
+
+precmd() { eval "$PROMPT_COMMAND" }
 
 # all of our zsh files
 typeset -U config_files
@@ -60,6 +65,3 @@ setopt prompt_subst
 #read current aws env
 export AWS_ENV=$(cat ~/.dotfiles/emdeon/current_env)
 
-# use python 3
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-source $HOME/.virtualenvs/py3/bin/activate

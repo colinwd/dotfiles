@@ -1,5 +1,5 @@
 #!/bin/sh
 
-# Connects to my VPS as a proxy on port 5555
+# Connects to my VPS as a proxy
 
-ssh -i ~/.ssh/do_rsa cdavis@turtl.colinwd.com -D 5555
+ssh -i ~/.ssh/do_rsa -D 1337 -f -C -q -N cdavis@turtl.colinwd.com
