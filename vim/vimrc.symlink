@@ -1,17 +1,4 @@
 set nocompatible
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/powerline', {'rpt': 'powerline/bindings/vim/'}
-
-call vundle#end()
 filetype indent plugin on
 
 set autoread
@@ -39,7 +26,6 @@ set tm=500
 " Visual
 syntax on
 set background=dark
-colorscheme base16-default
 set t_Co=256
 
 set encoding=utf8
