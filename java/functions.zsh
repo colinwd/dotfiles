@@ -3,6 +3,6 @@ gradle() {
     then
         ./gradlew "$@"
     else
-        ~/bin/gradle
+        ~/.dotfiles/bin/gradle "$@"
     fi
 }

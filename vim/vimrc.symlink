@@ -1,4 +1,28 @@
 set nocompatible
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Add all your plugins here (note older versions of Vundle used Bundle
+" instead of Plugin)
+
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'jnurmine/Zenburn'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'nvie/vim-flake8'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
 filetype indent plugin on
 
 set autoread
@@ -25,7 +49,7 @@ set tm=500
 
 " Visual
 syntax on
-set background=dark
+colorscheme zenburn
 set t_Co=256
 
 set encoding=utf8
@@ -38,3 +62,9 @@ set tabstop=4
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+
+" Split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
