@@ -5,9 +5,9 @@
     protocol = https
 [user]
 	name = Colin Davis
-    email = codavis@emdeon.com
+    email = codavis@changehealthcare.com
 [credential]
-    helper = cache
+	helper = store
 [alias]
     co = checkout
     count   = !git shortlog -sn
@@ -46,3 +46,5 @@
     default = simple
 [http]
 	sslVerify = true
+[pull]
+	rebase = true

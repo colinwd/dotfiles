@@ -3,56 +3,55 @@ sss() {
 }
 
 bastion() {
-	ssh -D 4096 CODAVIS@10.200.60.119
+	ssh -D 4096 CODAVIS@pl-bnaaebas01.emdeon.net
 }
 
 pf() {
     ssh -L $1:$2:$1 CODAVIS@pl-bastion1.emdeon.net
 }
 
-snapshot-publish() {
-	gradle clean build publish -Purl=http://nexus.westlakerobotics.com:8081/nexus/content/repositories/snapshots
-}
-
-wlr-clone() {
-    git clone git@git.westlakerobotics.com:westlakerobotics/$1
-}
-
-mobius() {
-    echo "changing to mobius"
-    chmod 777 ~/.ssh/current.pem
-    cp ~/.ssh/medical-billing-dev.pem ~/.ssh/current.pem
-    chmod 400 ~/.ssh/current.pem
-    export AWS_ENV=mobius
-    echo "mobius" > ~/.dotfiles/emdeon/current_env
-    echo "changed to mobius"
-}
-
 assumeRole() {
-    session_info=$(aws sts assume-role --role-arn arn:aws:iam::$1 --role-session-name "$2")
+    # Clear out any previously set credentials
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SESSION_TOKEN
+    unset AWS_SECURITY_TOKEN
+
+    # Get credentials and extract values from JSON
+    session_info=$(aws --profile "$3" sts assume-role --role-arn arn:aws:iam::$1 --role-session-name "$2")
     mig_secret_key=`echo $session_info | jq '.Credentials.SecretAccessKey' -r`
     mig_session_token=`echo $session_info | jq '.Credentials.SessionToken' -r`
     mig_access_key=`echo $session_info | jq '.Credentials.AccessKeyId' -r`
-    export AWS_ACCESS_KEY_ID=$mig_access_key
-    export AWS_SECRET_ACCESS_KEY=$mig_secret_key
-    export AWS_SESSION_TOKEN=$mig_session_token
-    export AWS_SECURITY_TOKEN=$mig_session_token
+
+    # Set environment variables if the call succeeded
+    if [ ! -z "$mig_access_key" ]; then
+        export AWS_ACCESS_KEY_ID=$mig_access_key
+    fi
+    if [ ! -z "$mig_secret_key" ]; then
+        export AWS_SECRET_ACCESS_KEY=$mig_secret_key
+    fi
+    if [ ! -z "$mig_session_token" ]; then
+        export AWS_SESSION_TOKEN=$mig_session_token
+        export AWS_SECURITY_TOKEN=$mig_session_token
+    fi
 }
 
 assumeErx() {
-    aws_role_credentials user arn:aws:iam::661740953475:role/erx/ErxDevelopers wlr
+    assumeRole 661740953475:role/erx/ErxDevelopers wlr emdeon-nonprod
 }
 
 assumeMobius() {
-   aws_role_credentials user arn:aws:iam::822825227953:role/mobius/MobiusDevelopers mobius
+   assumeRole 822825227953:role/mobius/MobiusDevelopers mobius emdeon-nonprod
 }
 
-# i3 display switching functions
-dock() {
-    xrandr --output DisplayPort-1 --primary
-    xrandr --output eDP --off
+assumeEva() {
+    assumeRole 798858686812:role/Developers eva emdeon-nonprod
 }
 
-undock() {
-    xrandr --output eDP --primary --auto
+assumeCie() {
+    assumeRole 822825227953:role/Cie-Developer cie emdeon-nonprod
+}
+
+assumeCieProd() {
+    assumeRole 487169392947:role/Cie-Developer cie emdeon-prod
 }
