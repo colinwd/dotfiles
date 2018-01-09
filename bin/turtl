@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Connects to my VPS as a proxy
-
-ssh -i ~/.ssh/do_rsa -D 1337 -f -C -q -N cdavis@turtl.colinwd.com
