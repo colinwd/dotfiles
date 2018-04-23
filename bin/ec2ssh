@@ -24,7 +24,7 @@ def get_instance_ip(instance):
 
 
 def find_key_file(key_name):
-    key_path = '/home/cdavis/.ssh/{}.pem'.format(key_name)
+    key_path = '/Users/codavis/.ssh/{}.pem'.format(key_name)
 
     if os.path.isfile(key_path):
         return key_path
